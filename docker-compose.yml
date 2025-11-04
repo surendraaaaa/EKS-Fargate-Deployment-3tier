@@ -1,0 +1,52 @@
+
+
+services:
+  database:
+    image: my-database
+    container_name: database
+    environment:
+      POSTGRES_DB: appdb
+      POSTGRES_USER: appuser
+      POSTGRES_PASSWORD: password123
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+  backend:
+    build: ./backend
+    ports:
+      - "8080:8080"
+    environment:
+      DB_HOST: database
+      DB_USER: appuser
+      DB_PASSWORD: password123
+      DB_NAME: appdb
+      DB_PORT: 5432
+    depends_on:
+      - database
+    networks:
+      - app-network
+
+
+  frontend:
+    image: my-frontend
+    container_name: frontend
+    depends_on:
+      - backend
+    ports:
+      - "8081:80"
+    environment:
+      # Your frontend will call the backend via this URL (Docker network)
+      REACT_APP_API_URL: http://backend:8080
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  pgdata:

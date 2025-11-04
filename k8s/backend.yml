@@ -1,0 +1,50 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: 3tier-backend
+  namespace: 3tier-demo
+  labels:
+    app: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: surendraprajapati/backend-demoapp:latest
+        ports:
+          - containerPort: 8080
+        env:
+        - name: DB_HOST
+          value: 3tier-database
+        - name: DB_USER
+          value: appuser
+        - name: DB_PASSWORD
+          value: password123
+        - name: DB_NAME
+          value: appdb
+        - name: DB_PORT
+          value: "5432"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+  namespace: 3tier-demo
+  labels:
+    app: backend
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 8080
+      protocol: TCP
+  selector:
+    app: backend
