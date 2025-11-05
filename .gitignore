@@ -1,0 +1,45 @@
+# Terraform files
+*.tfstate
+*.tfstate.*
+.terraform/
+crash.log
+*.tfvars
+*.tfvars.json
+override.tf
+override.tf.json
+terraform.tfvars
+terraform.tfvars.json
+.plan
+*.backup
+
+# Terraform Cloud agent artifacts
+.tfc-agent/
+
+# Python virtual environment
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+
+# IDE/editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*.bak
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+#aws
+aws
+# Sensitive files
+.env
+.env.*
+
