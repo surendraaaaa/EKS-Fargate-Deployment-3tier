@@ -73,5 +73,4 @@ resource "helm_release" "aws_lb_controller" {
     { name = "vpcId", value = module.vpc.vpc_id },
     { name = "nodeSelector.role", value = "alb-controller" }
   ]
-} # <-- Closing brace added here
-
+}

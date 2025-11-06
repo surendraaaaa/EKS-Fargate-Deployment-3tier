@@ -5,7 +5,7 @@ variable "region" {
 
 variable "cluster_name" {
   type    = string
-  default = "3tier-eks-fargate"
+  default = "3tier-eks-fargate-1"
 }
 
 

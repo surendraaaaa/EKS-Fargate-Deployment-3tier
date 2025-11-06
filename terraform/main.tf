@@ -42,7 +42,7 @@ module "eks" {
       instance_types       = ["t3.small"]
       subnet_ids           = module.vpc.public_subnets
       node_group_name      = "alb-controller"
-      node_group_public_ip = true # <-- assign public IPs
+      node_group_public_ip = true 
       labels = {
         role = "alb-controller"
       }
@@ -79,10 +79,12 @@ module "eks" {
 # Export kubeconfig data for providers
 data "aws_eks_cluster" "cluster" {
   name = module.eks.cluster_name
+  depends_on = [ module.eks ]
 }
 
 data "aws_eks_cluster_auth" "cluster" {
   name = module.eks.cluster_name
+  depends_on = [ module.eks ]
 }
 
 provider "kubernetes" {
