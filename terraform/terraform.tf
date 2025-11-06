@@ -1,32 +1,33 @@
 terraform {
-required_version = ">= 1.2.0"
-        required_providers {
-        aws = {
-        source = "hashicorp/aws"
-        version = ">= 4.0"
-        }
+  required_version = ">= 1.2.0"
 
-        kubernetes = {
-        source = "hashicorp/kubernetes"
-        version = ">= 2.0"
-        }
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = ">= 4.0"
+    }
 
-        helm = {
-        source = "hashicorp/helm"
-        version = ">= 2.0"
-        }
-    }   
+    kubernetes = {
+      source  = "hashicorp/kubernetes"
+      version = ">= 2.0"
+    }
 
-    cloud {
-    organization = "my-remote-backend" 
+    helm = {
+      source  = "hashicorp/helm"
+      version = ">= 2.0"
+    }
+  }
+
+  cloud {
+    organization = "my-remote-backend"
 
     workspaces {
-      name = "dev" 
+      name = "dev"
     }
   }
 }
 
-
 provider "aws" {
-region = var.region
+  region = var.region
 }
+

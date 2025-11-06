@@ -28,7 +28,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: 3tier-frontend
+  name: frontend-service
   namespace: 3tier-demo
   labels:
     app: frontend
